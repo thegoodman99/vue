@@ -18,10 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/users', function () {
-    if (rand (1,10) < 3) {
-        abort(500, 'We could not retrieve the users');
-    }
+Route::namespace('Api')->group(function (){
+    Route::get('/users', 'UsersController@index');
     
-    return factory('App\User', 10)->make();
+    Route::get('/users/{user}', 'UsersController@show' );
+    
 });
